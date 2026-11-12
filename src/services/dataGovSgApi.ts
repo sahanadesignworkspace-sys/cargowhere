@@ -232,3 +232,27 @@ export function estimateParkingCost(carpark: Carpark, durationMinutes: number): 
     breakdown: `Estimated at ~$${carpark.rates.hourlyRateEstimate.toFixed(2)}/hr for ${Math.floor(durationMinutes / 60)}h ${durationMinutes % 60}m.`,
   };
 }
+
+/**
+ * Client helper to call our serverless /api/carparkavailability endpoint
+ */
+export async function fetchLTADataMallCarparks(): Promise<{
+  timestamp: string;
+  count: number;
+  value: Array<{
+    CarParkID: string;
+    Area: string;
+    Development: string;
+    Location: string;
+    AvailableLots: number;
+    LotType: string;
+    Agency: string;
+  }>;
+}> {
+  const response = await fetch('/api/carparkavailability?all=true');
+  if (!response.ok) {
+    const errorJson = await response.json().catch(() => ({}));
+    throw new Error(errorJson.message || `LTA API error (Status ${response.status})`);
+  }
+  return response.json();
+}
