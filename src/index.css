@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
+  
+  .font-mono,
+  .tabular-nums {
+    font-family: 'JetBrains Mono', monospace;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Leaflet Map Custom Tweaks */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background: #f8fafc;
+}
+
+.dark .leaflet-container {
+  background: #090d16;
+}
+
+.custom-carpark-pin {
+  background: transparent;
+  border: none;
+}
+
+.leaflet-popup-content-wrapper {
+  padding: 0 !important;
+  border-radius: 12px !important;
+  overflow: hidden;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
+  border: 1px solid rgba(226, 232, 240, 0.8) !important;
+}
+
+.dark .leaflet-popup-content-wrapper {
+  background: #0f172a !important;
+  border-color: rgba(51, 65, 85, 0.8) !important;
+  color: #f1f5f9 !important;
+}
+
+.leaflet-popup-content {
+  margin: 0 !important;
+  line-height: inherit !important;
+}
+
+.leaflet-popup-tip {
+  display: none !important;
+}
